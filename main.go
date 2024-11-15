@@ -14,10 +14,11 @@ func main() {
 
 	app := fiber.New()
 
-	if err := database.DB.AutoMigrate(&schemas.User{}); err != nil {
+	if err := database.DB.AutoMigrate(&schemas.User{}, schemas.Character{}); err != nil {
 		log.Fatal("Error migrate", err)
 	}
 
-	routes.SetuserRoutes(app)
+	routes.RunRoutes(app)
+
 	log.Fatal(app.Listen(":3000"))
 }
